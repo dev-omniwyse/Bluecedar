@@ -61,9 +61,10 @@ class TestBluecedarSpockIT extends Specification {
 			.withSetting(PopularProperties.TRANSPORT_TCP_PORT, EsTransportPort)
 			.withSetting(PopularProperties.CLUSTER_NAME, EsClusterName)
 			.withSetting(PopularProperties.HTTP_PORT, httpPort)
-			.withEsJavaOpts("-Xms2g -Xmx2g")
+			.withEsJavaOpts("-Xms128m -Xmx2g")
 			.withStartTimeout(60, TimeUnit.SECONDS)
 			.withIndex("testing", IndexSettings.builder().build())
+			.withCleanInstallationDirectoryOnStop(false)
 			.build()
 			.start();
 		}
