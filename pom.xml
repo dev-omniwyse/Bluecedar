@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bluecedar.analyzer</groupId>
+  <artifactId>Bluecedar</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.5.RELEASE</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring boot dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+
+		<!-- Elastic Search high level rest client dependencie -->
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+			<version>6.0.1</version>
+		</dependency>
+
+		<!-- Embedded ES for Integration testing -->
+		<dependency>
+			<groupId>pl.allegro.tech</groupId>
+			<artifactId>embedded-elasticsearch</artifactId>
+			<version>2.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- json-simple mapping dependency -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.typesafe</groupId>
+			<artifactId>config</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+
+		<!-- Spock dependences -->
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>1.1-groovy-2.4-rc-2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-spring</artifactId>
+			<version>1.1-groovy-2.4-rc-3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<!-- The gmavenplus plugin is used to compile Groovy code. To learn more 
+					about this plugin, visit https://github.com/groovy/GMavenPlus/wiki -->
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>compileTests</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>
