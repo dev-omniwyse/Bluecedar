@@ -32,7 +32,7 @@ public class ApplicationConfig extends AbstractFactoryBean<RestHighLevelClient> 
 	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 	@Value("${es.httpports}")
-    private String httpPort;
+    private String httpPorts;
     
 	@Value("${es.host}")
     private String host;
@@ -60,7 +60,7 @@ public class ApplicationConfig extends AbstractFactoryBean<RestHighLevelClient> 
     	RestHighLevelClient client = null;
         try {
         	logger.info("Begin: buildClient()");
-    		logger.debug("isAuthenticES -> "+isSecured +"\n ES httpPort -> "+httpPort+"\nES host -> "+host);
+    		logger.debug("isAuthenticES -> "+isSecured +"\n ES httpPort -> "+httpPorts+"\nES host -> "+host);
     		
         	if(isSecured) {
         		// With Authentication
@@ -99,10 +99,10 @@ public class ApplicationConfig extends AbstractFactoryBean<RestHighLevelClient> 
     private HttpHost[] getHttpPorts() {
     	
     	List<HttpHost> Hostslist = new ArrayList<HttpHost>();
-    	String[] httpPorts = httpPort.split(",");
-    	for (int i =0;i<httpPorts.length;i++) {
-    		if(!"".equals(httpPorts[i].trim())) {
-    			Hostslist.add(new HttpHost(host, Integer.parseInt(httpPorts[i].trim()), "http"));
+    	String[] http_ports = httpPorts.split(",");
+    	for (int i =0;i<http_ports.length;i++) {
+    		if(!"".equals(http_ports[i].trim())) {
+    			Hostslist.add(new HttpHost(host, Integer.parseInt(http_ports[i].trim()), "http"));
     		}
 		}
     	HttpHost[] hosts = new HttpHost[Hostslist.size()];

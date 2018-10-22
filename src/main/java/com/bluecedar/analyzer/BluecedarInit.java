@@ -13,8 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 
-@SpringBootApplication
-@ComponentScan({"com.bluecedar"})
+@SpringBootApplication(scanBasePackages="com.bluecedar.analyzer")
 public class BluecedarInit {
 	
 	static Logger logger = (Logger) LoggerFactory.getLogger(BluecedarInit.class);

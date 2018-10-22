@@ -49,7 +49,7 @@ public class BluecedarController {
 
 	@GetMapping("/payload/{msgtype}/{name}")
 	public ResponseEntity<?> getPayload(@PathVariable("name") String name , @PathVariable("msgtype") String msgtype) throws Exception {
-		logger.info("Begin: getByUseName() method name is "+name);
+		logger.info("Begin: getByUseName() method and name is "+name +" msgtype is "+msgtype);
 		List<Map<String, Object>> list = null;
 		
 		try {

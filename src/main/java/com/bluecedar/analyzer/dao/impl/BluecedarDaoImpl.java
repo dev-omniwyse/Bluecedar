@@ -87,7 +87,7 @@ public class BluecedarDaoImpl implements BluecedarDao{
 
 	public List<Map<String, Object>> searchByUserName(String name, String msgtype) throws Exception {
 		logger.info("Begin: searchByUserName()");
-		List<Map<String, Object>> list = new ArrayList();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		SearchResponse response = null;
 		try {
 			if(null != msgtype && (msgtype.equals("logs") || msgtype.equals("reports"))) {
@@ -104,8 +104,8 @@ public class BluecedarDaoImpl implements BluecedarDao{
 					list.add(map);
 				}
 			}else {
-    			logger.error("Invalid message type in provided");
-    			throw new Exception("Invalid message type in provided");
+    			logger.error("Invalid message type provided");
+    			throw new Exception("Invalid message type provided");
     		}
 		}  catch(ElasticsearchException e) {
 			logger.error(e.getDetailedMessage());
