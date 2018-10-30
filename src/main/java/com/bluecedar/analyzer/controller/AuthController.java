@@ -20,12 +20,12 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/token")
-public class TokenController {
+public class AuthController {
 
 
     private TokenGenerator tokenGenerator;
 
-    public TokenController(TokenGenerator jwtGenerator) {
+    public AuthController(TokenGenerator jwtGenerator) {
         this.tokenGenerator = jwtGenerator;
     }
 

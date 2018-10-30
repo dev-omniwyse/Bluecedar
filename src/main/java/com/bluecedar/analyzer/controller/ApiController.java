@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/analyzer")
-public class BluecedarController {
+public class ApiController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
@@ -53,7 +53,7 @@ public class BluecedarController {
 
 	@GetMapping(path =  "/payload/{msgtype}/{name}", produces = "application/json" )
 	@ApiOperation(value = "Fetch json by devname",
-    	notes = "This endpoint will fetch the json from Elastic search based on 'devname' field")
+    	notes = "This endpoint will fetch the json from elastic search based on 'devname' field")
 	public ResponseEntity<?> getPayload(@PathVariable("name") String name , @PathVariable("msgtype") String msgtype) throws Exception {
 		logger.info("Begin: getByUseName() method and name is "+name +" msgtype is "+msgtype);
 		List<Map<String, Object>> list = null;
