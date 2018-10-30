@@ -4,21 +4,18 @@ import static org.junit.Assert.assertEquals
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup
+
 import java.util.concurrent.TimeUnit
-import org.assertj.core.api.ThrowableAssert
-import org.elasticsearch.ElasticsearchStatusException
+
 import org.json.simple.JSONArray
 import org.json.simple.parser.JSONParser
 import org.junit.FixMethodOrder
-import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.TestPropertySource
-import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.MvcResult
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
@@ -27,11 +24,16 @@ import com.bluecedar.analyzer.BluecedarInit
 import com.bluecedar.analyzer.controller.BluecedarController
 import com.bluecedar.analyzer.ut.test.Jsons
 import com.fasterxml.jackson.databind.ObjectMapper
+
 import pl.allegro.tech.embeddedelasticsearch.EmbeddedElastic
 import pl.allegro.tech.embeddedelasticsearch.IndexSettings
 import pl.allegro.tech.embeddedelasticsearch.PopularProperties
 import spock.lang.Specification
-
+/**
+ *
+ * @author Ramu Enugala
+ *
+ */
 @TestPropertySource(locations = "classpath:application-intigration.properties")
 @SpringBootTest(classes = BluecedarInit.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -126,18 +128,7 @@ class TestBluecedarSpockIT extends Specification {
 			
 	}
 	
-	def "Test4 - Save should throw Elastic search exception"() {
-		given:
-			def json = Jsons.esExceptionJson
-		when:
-			 mvc.perform(post("/analyzer/payload").contentType(MediaType.APPLICATION_JSON).content(json))
-		then:
-			org.springframework.web.util.NestedServletException ex = thrown()
-			org.assertj.core.api.Assertions.assertThat(ex).hasCauseExactlyInstanceOf(ElasticsearchStatusException.class);
-			
-	}
-	
-	def "Test5 - Save should throw exception for invalid index"() {
+	def "Test4 - Save should throw exception for invalid index"() {
 		given:
 			def json = Jsons.invalidJson
 		when:
@@ -147,6 +138,18 @@ class TestBluecedarSpockIT extends Specification {
 			org.assertj.core.api.Assertions.assertThat(ex).hasCauseExactlyInstanceOf(Exception.class);
 			
 	}
+	
+	def "Test5 - Save should throw ProcessingException(schema validation) exception"() {
+		given:
+			def json = Jsons.wrongJsonSchema
+		when:
+			 mvc.perform(post("/analyzer/payload").contentType(MediaType.APPLICATION_JSON).content(json))
+		then:
+			org.springframework.web.util.NestedServletException ex = thrown()
+			org.assertj.core.api.Assertions.assertThat(ex).hasCauseExactlyInstanceOf(com.github.fge.jsonschema.core.exceptions.ProcessingException.class);
+			
+	}
+	
 	def "Test6 - Search json should throw exception for invalid index"() {
 		given:
 			def name = "bluecedar";

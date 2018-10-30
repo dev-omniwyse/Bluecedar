@@ -1,0 +1,324 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "additionalProperties":false,
+  "required": [
+    "msgtype",
+    "devtype",
+    "devname",
+    "id",
+    "reports"
+  ],
+  "properties": {
+    "msgtype": {
+      "$id": "#/properties/msgtype",
+      "type": "string",
+      "title": "The Msgtype Schema",
+      "default": "",
+      "examples": [
+        "reports"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "devtype": {
+      "$id": "#/properties/devtype",
+      "type": "string",
+      "title": "The Devtype Schema",
+      "default": "",
+      "examples": [
+        "appliance"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "devname": {
+      "$id": "#/properties/devname",
+      "type": "string",
+      "title": "The Devname Schema",
+      "default": "",
+      "examples": [
+        "bluecedar appliance"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The Id Schema",
+      "default": "",
+      "examples": [
+        "172.10.34.2"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "reports": {
+      "$id": "#/properties/reports",
+      "type": "array",
+      "title": "The Reports Schema",
+      "items": {
+        "$id": "#/properties/reports/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "type",
+          "sessionId"
+        ],
+        "properties": {
+          "type": {
+            "$id": "#/properties/reports/items/properties/type",
+            "type": "string",
+            "title": "The Type Schema",
+            "default": "",
+            "examples": [
+              "sessionstart"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "sessionId": {
+            "$id": "#/properties/reports/items/properties/sessionId",
+            "type": "object",
+            "title": "The Sessionid Schema",
+            "required": [
+              "username",
+              "device",
+              "app"
+            ],
+            "properties": {
+              "username": {
+                "$id": "#/properties/reports/items/properties/sessionId/properties/username",
+                "type": "string",
+                "title": "The Username Schema",
+                "default": "",
+                "examples": [
+                  "jruser"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "device": {
+                "$id": "#/properties/reports/items/properties/sessionId/properties/device",
+                "type": "object",
+                "title": "The Device Schema",
+                "required": [
+                  "osType",
+                  "hardware",
+                  "version",
+                  "carrierName",
+                  "mobileCountryCode",
+                  "mobileNetworkCode",
+                  "uniqueId",
+                  "jailbroken"
+                ],
+                "properties": {
+                  "osType": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/osType",
+                    "type": "string",
+                    "title": "The Ostype Schema",
+                    "default": "",
+                    "examples": [
+                      "ios"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "deviceName": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/deviceName",
+                    "type": "string",
+                    "title": "The Devicename Schema",
+                    "default": "",
+                    "examples": [
+                      "Jims Phone"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "hardware": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/hardware",
+                    "type": "string",
+                    "title": "The Hardware Schema",
+                    "default": "",
+                    "examples": [
+                      "iPhone10,2"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "version": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/version",
+                    "type": "string",
+                    "title": "The Version Schema",
+                    "default": "",
+                    "examples": [
+                      "12.0"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "carrierName": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/carrierName",
+                    "type": "string",
+                    "title": "The Carriername Schema",
+                    "default": "",
+                    "examples": [
+                      "Verizon"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "mobileCountryCode": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/mobileCountryCode",
+                    "type": "string",
+                    "title": "The Mobilecountrycode Schema",
+                    "default": "",
+                    "examples": [
+                      "311"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "mobileNetworkCode": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/mobileNetworkCode",
+                    "type": "string",
+                    "title": "The Mobilenetworkcode Schema",
+                    "default": "",
+                    "examples": [
+                      "480"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "uniqueId": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/uniqueId",
+                    "type": "string",
+                    "title": "The Uniqueid Schema",
+                    "default": "",
+                    "examples": [
+                      "c2a7d16fc61cde9518ef31c232c46fac7657ee635ee2c526123460761edb885a"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "jailbroken": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/device/properties/jailbroken",
+                    "type": "boolean",
+                    "title": "The Jailbroken Schema",
+                    "default": false,
+                    "examples": [
+                      false
+                    ]
+                  }
+                }
+              },
+              "app": {
+                "$id": "#/properties/reports/items/properties/sessionId/properties/app",
+                "type": "object",
+                "title": "The App Schema",
+                "required": [
+                  "assignedIp",
+                  "federation",
+                  "appName",
+                  "appPackageId",
+                  "appVersion",
+                  "appUuid",
+                  "appGsid"
+                ],
+                "properties": {
+                  "assignedIp": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/assignedIp",
+                    "type": "string",
+                    "title": "The Assignedip Schema",
+                    "default": "",
+                    "examples": [
+                      "10.42.5.14"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "federation": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/federation",
+                    "type": "string",
+                    "title": "The Federation Schema",
+                    "default": "",
+                    "examples": [
+                      "group.8PZ8T7ZJD7.com.bcn.shareddatastore.default"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "appName": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/appName",
+                    "type": "string",
+                    "title": "The Appname Schema",
+                    "default": "",
+                    "examples": [
+                      "TouchDown"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "appPackageId": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/appPackageId",
+                    "type": "string",
+                    "title": "The Apppackageid Schema",
+                    "default": "",
+                    "examples": [
+                      "com.bluecedar.wrapped.com.nitrodesk.tdi.TouchDown"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "appVersion": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/appVersion",
+                    "type": "string",
+                    "title": "The Appversion Schema",
+                    "default": "",
+                    "examples": [
+                      "9"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "atlasClientVersion": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/atlasClientVersion",
+                    "type": "string",
+                    "title": "The Atlasclientversion Schema",
+                    "default": "",
+                    "examples": [
+                      "3.22.0"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "appUuid": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/appUuid",
+                    "type": "string",
+                    "title": "The Appuuid Schema",
+                    "default": "",
+                    "examples": [
+                      "7BFD2CF5-48A6-4D8D-BA8C-E7764C3AAC83"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "appGsid": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/appGsid",
+                    "type": "integer",
+                    "title": "The Appgsid Schema",
+                    "default": 0,
+                    "examples": [
+                      1706955780
+                    ]
+                  },
+                  "acceptedEula": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/acceptedEula",
+                    "type": "boolean",
+                    "title": "The Acceptedeula Schema",
+                    "default": false,
+                    "examples": [
+                      true
+                    ]
+                  },
+                  "appTampered": {
+                    "$id": "#/properties/reports/items/properties/sessionId/properties/app/properties/appTampered",
+                    "type": "boolean",
+                    "title": "The Apptampered Schema",
+                    "default": false,
+                    "examples": [
+                      false
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

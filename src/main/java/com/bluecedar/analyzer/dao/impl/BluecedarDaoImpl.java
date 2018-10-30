@@ -17,9 +17,6 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -46,24 +43,16 @@ public class BluecedarDaoImpl implements BluecedarDao{
         this.restHighLevelClient = restHighLevelClient;
     }
 	
-	public String save(String json) throws Exception {
+    public String save(Map<String, Object> json, String msgtype) throws Exception {
 		logger.info("Begin: save()");
 		IndexResponse response = null;
 		String result = null;
         try {
-    		JSONParser parser = new JSONParser(); 
-    		JSONObject json_obj = (JSONObject) parser.parse(json);
-    		Map<String, Object> json_Map = objectMapper.convertValue(json_obj, Map.class);
-    		json_Map.put("id", UUID.randomUUID().toString());
-    		String msgtype = (String) json_Map.get("msgtype");
-    		if(null != msgtype && (msgtype.equals("logs") || msgtype.equals("reports"))) {
-    			IndexRequest indexRequest = new IndexRequest(msgtype, msgtype, (String)json_Map.get("id")).source(json_Map);
-                response = restHighLevelClient.index(indexRequest);
-                result = response.getId();
-    		}else {
-    			logger.error("Invalid message type in json");
-    			throw new Exception("Invalid message type in json");
-    		}
+    		
+    		json.put("id", UUID.randomUUID().toString());
+    		IndexRequest indexRequest = new IndexRequest(msgtype, msgtype, (String)json.get("id")).source(json);
+            response = restHighLevelClient.index(indexRequest);
+            result = response.getId();
             
         } catch (IOException e) {
 			logger.error(e.getMessage());
@@ -73,11 +62,7 @@ public class BluecedarDaoImpl implements BluecedarDao{
 			logger.error(e.getDetailedMessage());
 			e.printStackTrace();
             throw e;
-        } catch (ParseException e) {
-			e.printStackTrace();
-			logger.error("Json parsing exception. Please verify your json");
-			throw e;
-		} catch (Exception e) {
+        } catch (Exception e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();
 			throw e;

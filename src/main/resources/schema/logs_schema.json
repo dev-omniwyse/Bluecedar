@@ -1,0 +1,115 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "additionalProperties":false,
+  "required": [
+    "msgtype",
+    "devtype",
+    "devname",
+    "id",
+    "logs"
+  ],
+  "properties": {
+    "msgtype": {
+      "$id": "#/properties/msgtype",
+      "type": "string",
+      "title": "The Msgtype Schema",
+      "default": "",
+      "examples": [
+        "logs"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "devtype": {
+      "$id": "#/properties/devtype",
+      "type": "string",
+      "title": "The Devtype Schema",
+      "default": "",
+      "examples": [
+        "appliance"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "devname": {
+      "$id": "#/properties/devname",
+      "type": "string",
+      "title": "The Devname Schema",
+      "default": "",
+      "examples": [
+        "log 1"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The Id Schema",
+      "default": "",
+      "examples": [
+        "172.10.34.2"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "logs": {
+      "$id": "#/properties/logs",
+      "type": "array",
+      "title": "The Logs Schema",
+      "items": {
+        "$id": "#/properties/logs/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "time",
+          "level",
+          "class",
+          "message"
+        ],
+        "properties": {
+          "time": {
+            "$id": "#/properties/logs/items/properties/time",
+            "type": "string",
+            "title": "The Time Schema",
+            "default": "",
+            "examples": [
+              "2018-10-05T13:34:08.777304983-04:00"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "level": {
+            "$id": "#/properties/logs/items/properties/level",
+            "type": "string",
+            "title": "The Level Schema",
+            "default": "",
+            "examples": [
+              "INFO"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "class": {
+            "$id": "#/properties/logs/items/properties/class",
+            "type": "string",
+            "title": "The Class Schema",
+            "default": "",
+            "examples": [
+              "IPSEC"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "message": {
+            "$id": "#/properties/logs/items/properties/message",
+            "type": "string",
+            "title": "The Message Schema",
+            "default": "",
+            "examples": [
+              "This is an informational log message for the appliance ipsec class"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    }
+  }
+}

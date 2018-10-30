@@ -28,10 +28,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.bluecedar.analyzer.dao.BluecedarDao;
 import com.bluecedar.analyzer.dao.impl.BluecedarDaoImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestBluecedarUT {
+public class TestBluecedarDaoUT {
 	
 	BluecedarDao bluecedarDao;
 	
@@ -65,23 +69,18 @@ public class TestBluecedarUT {
 	public void saveTest() throws Exception {
 		Mockito.when(restHighLevelClient.index(Mockito.any(IndexRequest.class))).thenReturn(indexResponse);
 		Mockito.when(indexResponse.getId()).thenReturn("12345");
-		String id = bluecedarDao.save(Jsons.logJson);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		JSONParser parser = new JSONParser(); 
+		JSONObject json_obj = (JSONObject) parser.parse(Jsons.logJson);
+		Map<String, Object> json_map = objectMapper.convertValue(json_obj, Map.class);
+		String msgtype = (String) json_map.get("msgtype");
+		
+		
+		String id = bluecedarDao.save(json_map,msgtype);
 		assertEquals("12345",id);
 	}
 	
-	@Test(expected = Exception.class)
-	public void invalidJsonTest() throws Exception {
-		Mockito.when(restHighLevelClient.index(Mockito.any(IndexRequest.class))).thenReturn(indexResponse);
-		Mockito.when(indexResponse.getId()).thenReturn("12345");
-		bluecedarDao.save(Jsons.invalidJson);
-	}
-	
-	@Test(expected = Exception.class)
-	public void parsingJsonExceptionTest() throws Exception {
-		Mockito.when(restHighLevelClient.index(Mockito.any(IndexRequest.class))).thenReturn(indexResponse);
-		Mockito.when(indexResponse.getId()).thenReturn("12345");
-		bluecedarDao.save(Jsons.parsingExceptionJson);
-	}
 	
 	@Test
 	public void searchUserByNameTest() throws Exception {

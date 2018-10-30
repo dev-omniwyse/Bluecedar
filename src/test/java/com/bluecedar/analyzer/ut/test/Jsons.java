@@ -259,15 +259,13 @@ public class Jsons {
 			"  }";
 	
 	
-	public static String esExceptionJson = "{\r\n" + 
+	public static String wrongJsonSchema = "{\r\n" + 
 			"\r\n" + 
 			"    \"msgtype\": \"logs\",\r\n" + 
 			"\r\n" + 
 			"    \"devtype\": \"appliance\",\r\n" + 
 			"\r\n" + 
-			"    \"\": \"name1\",\r\n" + 
-			"\r\n" + 
-			"    \"id\": \"172.10.34.2\",\r\n" + 
+			"    \"devname\": \"log 1\",\r\n" + 
 			"\r\n" + 
 			"    \"logs\": [\r\n" + 
 			"\r\n" + 
