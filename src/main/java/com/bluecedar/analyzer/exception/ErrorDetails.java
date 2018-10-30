@@ -3,6 +3,11 @@ package com.bluecedar.analyzer.exception;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 
 public class ErrorDetails {
 

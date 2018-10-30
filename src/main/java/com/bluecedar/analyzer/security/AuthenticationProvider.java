@@ -11,6 +11,11 @@ import com.bluecedar.analyzer.security.model.AuthenticationToken;
 import com.bluecedar.analyzer.security.model.Device;
 import com.bluecedar.analyzer.security.model.DeviceDetails;
 
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 @Component
 public class AuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 

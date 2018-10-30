@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bluecedar.analyzer.service.BluecedarService;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author Ramu Enugala
@@ -32,7 +34,9 @@ public class BluecedarController {
 	@Autowired
 	BluecedarService bluecedarService;
 	
-	@PostMapping("/payload")
+	@PostMapping(path = "/payload" , consumes = "application/json" )
+	@ApiOperation(value = "Save Json",
+	    notes = "This endpoint will save the json into elastic search")
 	public ResponseEntity<?> savePayload(@RequestBody String json) throws Exception{
 		logger.info("Begin: save()");
 		logger.debug("Json -> "+json);
@@ -47,7 +51,9 @@ public class BluecedarController {
 		return new ResponseEntity<String>(id, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/payload/{msgtype}/{name}")
+	@GetMapping(path =  "/payload/{msgtype}/{name}", produces = "application/json" )
+	@ApiOperation(value = "Fetch json by devname",
+    	notes = "This endpoint will fetch the json from Elastic search based on 'devname' field")
 	public ResponseEntity<?> getPayload(@PathVariable("name") String name , @PathVariable("msgtype") String msgtype) throws Exception {
 		logger.info("Begin: getByUseName() method and name is "+name +" msgtype is "+msgtype);
 		List<Map<String, Object>> list = null;

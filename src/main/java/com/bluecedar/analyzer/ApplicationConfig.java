@@ -2,6 +2,7 @@ package com.bluecedar.analyzer;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;

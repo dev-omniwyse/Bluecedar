@@ -6,7 +6,11 @@ import com.bluecedar.analyzer.security.model.Device;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 @Component
 public class TokenValidator {
 

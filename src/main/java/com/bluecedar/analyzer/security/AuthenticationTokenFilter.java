@@ -13,6 +13,11 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 
 import com.bluecedar.analyzer.security.model.AuthenticationToken;
 
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 public class AuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
     public AuthenticationTokenFilter() {

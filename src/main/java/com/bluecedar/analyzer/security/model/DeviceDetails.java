@@ -1,11 +1,14 @@
 package com.bluecedar.analyzer.security.model;
 
+import java.util.Collection;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
-
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 public class DeviceDetails implements UserDetails {
 
     private String deviceUID;

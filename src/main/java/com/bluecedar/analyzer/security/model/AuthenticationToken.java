@@ -1,7 +1,11 @@
 package com.bluecedar.analyzer.security.model;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
+/**
+ * 
+ * @author Ramu Enugala
+ *
+ */
 public class AuthenticationToken extends UsernamePasswordAuthenticationToken{
 
     private String token;
