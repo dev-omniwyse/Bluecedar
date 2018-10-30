@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MvcResult
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 import com.bluecedar.analyzer.BluecedarInit
-import com.bluecedar.analyzer.controller.BluecedarController
+import com.bluecedar.analyzer.controller.ApiController
 import com.bluecedar.analyzer.ut.test.Jsons
 import com.fasterxml.jackson.databind.ObjectMapper
 
@@ -42,7 +42,7 @@ class TestBluecedarSpockIT extends Specification {
 	MockMvc mvc;
 	
 	@Autowired
-	BluecedarController bluecedarController;
+	ApiController bluecedarController;
 	
 	@Value('${es.port}')
 	private int EsTransportPort;
