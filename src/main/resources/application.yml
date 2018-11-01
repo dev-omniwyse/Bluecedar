@@ -1,0 +1,28 @@
+es:
+   host: localhost
+   httpports: 9200
+   isSecured: true
+   userName: elastic
+   password: 9490515850
+   
+logging:
+   level:
+      com:
+         bluecedar.*: debug
+   pattern:
+      console: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger %X{userID} - %msg%n"
+      
+      
+spring:
+   banner:
+      location: classpath:banner.txt
+      
+server:
+   port: 8080
+   
+bluecedar:
+  security:
+    secured-paths:
+      - /analyzer/**
+
+
