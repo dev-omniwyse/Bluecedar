@@ -62,7 +62,7 @@ public class TestBluecedarDaoUT {
 
 	@Before
 	public void setup(){
-		bluecedarDao = new BluecedarDaoImpl(new ObjectMapper(), restHighLevelClient);
+		bluecedarDao = new BluecedarDaoImpl(restHighLevelClient);
 	}
 	
 	@Test

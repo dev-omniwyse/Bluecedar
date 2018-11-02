@@ -30,7 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class ApplicationConfig extends AbstractFactoryBean<RestHighLevelClient> implements  WebMvcConfigurer , WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>{
 	
-	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Value("${es.httpports}")
     private String httpPorts;
@@ -70,11 +70,8 @@ public class ApplicationConfig extends AbstractFactoryBean<RestHighLevelClient> 
             	        new UsernamePasswordCredentials(userName, password));
 
             	RestClientBuilder builder = RestClient.builder(getHttpPorts())
-            	        .setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
-            	            @Override
-            	            public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
-            	                return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-            	            }
+            	        .setHttpClientConfigCallback((HttpAsyncClientBuilder httpClientBuilder)-> {
+            	        	return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
             	        });
 
             	client = new RestHighLevelClient(builder);
@@ -99,15 +96,15 @@ public class ApplicationConfig extends AbstractFactoryBean<RestHighLevelClient> 
     
     private HttpHost[] getHttpPorts() {
     	
-    	List<HttpHost> Hostslist = new ArrayList<HttpHost>();
-    	String[] http_ports = httpPorts.split(",");
-    	for (int i =0;i<http_ports.length;i++) {
-    		if(!"".equals(http_ports[i].trim())) {
-    			Hostslist.add(new HttpHost(host, Integer.parseInt(http_ports[i].trim()), "http"));
+    	List<HttpHost> hostslist = new ArrayList<>();
+    	String[] ports = httpPorts.split(",");
+    	for (int i =0;i<ports.length;i++) {
+    		if(!"".equals(ports[i].trim())) {
+    			hostslist.add(new HttpHost(host, Integer.parseInt(ports[i].trim()), "http"));
     		}
 		}
-    	HttpHost[] hosts = new HttpHost[Hostslist.size()];
-    	hosts = Hostslist.toArray(hosts);
+    	HttpHost[] hosts = new HttpHost[hostslist.size()];
+    	hosts = hostslist.toArray(hosts);
 		return hosts;
     	
     }

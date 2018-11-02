@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class BluecedarServiceImpl implements BluecedarService{
 
-	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private String logsSchema;
 	private String reportsSchema;
@@ -39,11 +39,11 @@ public class BluecedarServiceImpl implements BluecedarService{
 			logsSchema = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("schema/logs_schema.json"),StandardCharsets.UTF_8);
 			reportsSchema = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("schema/reports_schema.json"),StandardCharsets.UTF_8);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Schema files not loaded properly" ,e);
 			try {
 				throw new Exception("Schema files not loaded properly");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				logger.error("Internal server error" ,e);
 			}
 		}
 	}
@@ -55,24 +55,22 @@ public class BluecedarServiceImpl implements BluecedarService{
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
 			JSONParser parser = new JSONParser(); 
-			JSONObject json_obj = (JSONObject) parser.parse(json);
-			Map<String, Object> json_map = objectMapper.convertValue(json_obj, Map.class);
-			String msgtype = (String) json_map.get("msgtype");
+			JSONObject jsonObj = (JSONObject) parser.parse(json);
+			Map<String, Object> jsonMap = objectMapper.convertValue(jsonObj, Map.class);
+			String msgtype = (String) jsonMap.get("msgtype");
 			if(null != msgtype && (msgtype.equals("logs") || msgtype.equals("reports"))) {
 				if(ValidationUtils.isJsonValid(msgtype.equals("logs")?logsSchema:reportsSchema, json)) {
-					id =  bluecedarDao.save(json_map,msgtype);
+					id =  bluecedarDao.save(jsonMap,msgtype);
 				}
 			}else {
 				logger.error("Invalid message type in json");
 				throw new Exception("Invalid message type in json");
 			}
 		} catch (ParseException e) {
-			e.printStackTrace();
-			logger.error("Json parsing exception. Please verify your json");
+			logger.error("Json parsing exception. Please verify your json",e);
 			throw e;
 		} catch(Exception e) {
-			logger.error(e.getMessage());
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			throw e;
 		}
 		
@@ -81,10 +79,15 @@ public class BluecedarServiceImpl implements BluecedarService{
 	}
 
 	@Override
-	public List<Map<String, Object>> searchByUserName(String name, String msgtype) throws Exception {
+	public List<Map<String, Object>> searchByUserName(String name, String msgtype) throws Exception{
 		logger.info("Begin: searchByUserName()");
 		List<Map<String, Object>> list = null;
-		list = bluecedarDao.searchByUserName(name,msgtype);;
+		try {
+			list = bluecedarDao.searchByUserName(name,msgtype);
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+			throw e;
+		}
 		logger.info("End: searchByUserName()");
 		return list;
 	}

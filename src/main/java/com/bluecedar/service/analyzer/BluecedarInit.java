@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages="com.bluecedar.service")
 public class BluecedarInit {
 	
-	static Logger logger = (Logger) LoggerFactory.getLogger(BluecedarInit.class);
+	static Logger logger = LoggerFactory.getLogger(BluecedarInit.class);
 	
 	 public static void main(String args[]) {
 		 

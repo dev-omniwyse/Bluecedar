@@ -47,17 +47,17 @@ public class TestBluecedarServiceUT {
 	
 	@Test(expected = Exception.class)
 	public void invalidJsonTest() throws Exception {
-		String id = bluecedarService.save(Jsons.invalidJson);
+		bluecedarService.save(Jsons.invalidJson);
 	}
 	
 	@Test(expected = Exception.class)
 	public void parsingJsonExceptionTest() throws Exception {
-		String id = bluecedarService.save(Jsons.parsingExceptionJson);
+		bluecedarService.save(Jsons.parsingExceptionJson);
 	}
 	
 	@Test(expected = ProcessingException.class)
 	public void jsonSchemaTest() throws Exception {
-		String id = bluecedarService.save(Jsons.wrongJsonSchema);
+		bluecedarService.save(Jsons.wrongJsonSchema);
 	}
 	
 }

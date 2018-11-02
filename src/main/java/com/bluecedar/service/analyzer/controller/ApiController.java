@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/analyzer")
 public class ApiController {
 
-	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	BluecedarService bluecedarService;
@@ -48,7 +48,7 @@ public class ApiController {
 			throw e;
 		}
 		logger.info("End: save()");
-		return new ResponseEntity<String>(id, HttpStatus.CREATED);
+		return new ResponseEntity<>(id, HttpStatus.CREATED);
 	}
 
 	@GetMapping(path =  "/payload/{msgtype}/{name}", produces = "application/json" )
@@ -65,7 +65,7 @@ public class ApiController {
 			throw e;
 		}
 		logger.info("End: getByUseName()");
-		return new ResponseEntity<List<Map<String, Object>>>(list, HttpStatus.OK);
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
 }

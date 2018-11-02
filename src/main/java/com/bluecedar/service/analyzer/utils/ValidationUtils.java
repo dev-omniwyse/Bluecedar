@@ -21,6 +21,9 @@ public class ValidationUtils {
 	public static final String JSON_V4_SCHEMA_IDENTIFIER = "http://json-schema.org/draft-04/schema#";
 	public static final String JSON_SCHEMA_IDENTIFIER_ELEMENT = "$schema";
 
+	private ValidationUtils(){
+		
+	}
 	public static JsonNode getJsonNode(String jsonText) throws IOException {
 		return JsonLoader.fromString(jsonText);
 	} 
@@ -38,7 +41,6 @@ public class ValidationUtils {
 				ProcessingMessage p = i.next();
 				
 				if(p.getLogLevel().toString().equalsIgnoreCase("error") || p.getLogLevel().toString().equalsIgnoreCase("fatal")) {
-					System.out.println(p.asJson());
 					throw new ProcessingException(p.asJson().toString());
 				}
 				

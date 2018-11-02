@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bluecedar.service.analyzer.dao.BluecedarDao;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -33,17 +32,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Repository
 public class BluecedarDaoImpl implements BluecedarDao{
 	
-	Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private RestHighLevelClient restHighLevelClient;
-    private ObjectMapper objectMapper;
     
-    public BluecedarDaoImpl( ObjectMapper objectMapper, RestHighLevelClient restHighLevelClient) {
-        this.objectMapper = objectMapper;
+    public BluecedarDaoImpl(RestHighLevelClient restHighLevelClient) {
         this.restHighLevelClient = restHighLevelClient;
     }
 	
-    public String save(Map<String, Object> json, String msgtype) throws Exception {
+    public String save(Map<String, Object> json, String msgtype) throws IOException {
 		logger.info("Begin: save()");
 		IndexResponse response = null;
 		String result = null;
@@ -54,17 +51,11 @@ public class BluecedarDaoImpl implements BluecedarDao{
             response = restHighLevelClient.index(indexRequest);
             result = response.getId();
             
-        } catch (IOException e) {
-			logger.error(e.getMessage());
-			e.printStackTrace();
+        } catch (IOException | ElasticsearchException e ) {
+			logger.error(e.getMessage(),e);
 			throw e;
-		} catch(ElasticsearchException e) {
-			logger.error(e.getDetailedMessage());
-			e.printStackTrace();
-            throw e;
-        } catch (Exception e) {
-			logger.error(e.getMessage());
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
 			throw e;
 		}
         logger.info("End: save()");
@@ -73,7 +64,7 @@ public class BluecedarDaoImpl implements BluecedarDao{
 
 	public List<Map<String, Object>> searchByUserName(String name, String msgtype) throws Exception {
 		logger.info("Begin: searchByUserName()");
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> list = new ArrayList<>();
 		SearchResponse response = null;
 		try {
 			if(null != msgtype && (msgtype.equals("logs") || msgtype.equals("reports"))) {
@@ -93,17 +84,11 @@ public class BluecedarDaoImpl implements BluecedarDao{
     			logger.error("Invalid message type provided");
     			throw new Exception("Invalid message type provided");
     		}
-		}  catch(ElasticsearchException e) {
-			logger.error(e.getDetailedMessage());
-			e.printStackTrace();
+		} catch(ElasticsearchException | IllegalArgumentException e) {
+			logger.error(e.getMessage(),e);
             throw e;
-        }  catch (IllegalArgumentException e) {
-        	logger.error(e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			e.printStackTrace();
+        } catch (Exception e) {
+			logger.error(e.getMessage(),e);
 			throw e;
 		}
 		
