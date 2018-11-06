@@ -7,6 +7,7 @@ Required Java 8
 # Application variables
 # Tomcat port number. By default 8080
 export SERVER_PORT
+export BRANCH_NAME
 
 # Elastic search engine variables
 # ES host url
