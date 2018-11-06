@@ -1,8 +1,8 @@
 # Bluecedar Analizer API
 
-# Required Java 8
+Required Java 8
 # Environment variables required:
-# Elastic search engine details:
+Elastic search engine details:
 
 # ES host url
 export ES_HOST
