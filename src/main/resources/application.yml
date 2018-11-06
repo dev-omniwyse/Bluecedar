@@ -1,7 +1,7 @@
 es:
    host: ${ES_HOST:localhost}
    httpports: ${ES_HTTP_PORTS:9200}
-   isSecured: ${ES_XPAK_INSTALED:false}
+   isSecured: ${ES_XPAK_INSTALLED:false}
    userName: ${ES_USERNAME:elastic}
    password: ${ES_PASSWORD:password}
    
