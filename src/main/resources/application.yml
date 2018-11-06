@@ -1,9 +1,9 @@
 es:
-   host: localhost
-   httpports: 9200
-   isSecured: true
-   userName: elastic
-   password: 9490515850
+   host: ${ES_HOST:localhost}
+   httpports: ${ES_HTTP_PORTS:9200}
+   isSecured: ${ES_XPAK_INSTALED:false}
+   userName: ${ES_USERNAME:elastic}
+   password: ${ES_PASSWORD:password}
    
 logging:
    level:
@@ -18,7 +18,7 @@ spring:
       location: classpath:banner.txt
       
 server:
-   port: 8080
+   port: ${server_port:8080}
    
 bluecedar:
   security:
