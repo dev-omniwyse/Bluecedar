@@ -17,8 +17,8 @@ export ES_HTTP_PORTS
 
 # ES XPAK datails. If XPAK installed on ES then ES_XPAK_INSTALED should be true and username and password are mandatory. If not ES_XPAK_INSTALED should be false and username and password are not required.
 
-export ES_XPAK_INSTALED\n
-export ES_USERNAME\n
-export ES_PASSWORD\n
+export ES_XPAK_INSTALED
+export ES_USERNAME
+export ES_PASSWORD
 ```
 
