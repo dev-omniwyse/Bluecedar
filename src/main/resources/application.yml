@@ -23,6 +23,9 @@ server:
 bluecedar:
   security:
     secured-paths:
-      - /analyzer/**
+      - /**
+    not-secured-paths:
+      ANY:
+        - /swagger/
 
 

@@ -55,7 +55,7 @@ public class ApiController {
 	@ApiOperation(value = "Fetch json by devname",
     	notes = "This endpoint will fetch the json from elastic search based on 'devname' field")
 	public ResponseEntity<?> getPayload(@PathVariable("name") String name , @PathVariable("msgtype") String msgtype) throws Exception {
-		logger.info("Begin: getByUseName() method and name is "+name +" msgtype is "+msgtype);
+		logger.info("Begin: getByUseName() method and name is {} msgtype is {}",name,msgtype);
 		List<Map<String, Object>> list = null;
 		
 		try {

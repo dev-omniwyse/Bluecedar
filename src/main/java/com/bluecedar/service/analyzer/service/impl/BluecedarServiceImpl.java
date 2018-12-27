@@ -30,6 +30,7 @@ public class BluecedarServiceImpl implements BluecedarService{
 	
 	private String logsSchema;
 	private String reportsSchema;
+	
 	@Autowired
 	BluecedarDao bluecedarDao;
 	
